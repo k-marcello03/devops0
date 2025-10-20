@@ -21,9 +21,6 @@ RUN apk add --no-cache \
     sqlite-libs \
     jpeg
 COPY . /app
-RUN DJANGO_SECRET_KEY="dummy" \
-    HASHIDS_SALT="dummy" \
-    python manage.py collectstatic --noinput
 EXPOSE 8000
 ENTRYPOINT ["scripts/entrypoint.sh"]
 CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "main.asgi:application"]
