@@ -1,5 +1,12 @@
 FROM alpine:3.22
 
-RUN apk add --no-cache bash curl
+WORKDIR /app
+COPY requirements.txt.
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["sh"]
+COPY . .
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+EXPOSE 5000
+
+CMD ["flask", "run"]
