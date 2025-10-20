@@ -1,13 +1,29 @@
 FROM python:3.11-alpine
-
+WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-RUN apk update && apk add --no-cache --virtual .build-deps gcc musl-dev python3-dev libffi-dev openssl-dev make
-WORKDIR /app
+RUN apk add --no-cache \
+    build-base \
+    libffi-dev \
+    sqlite-dev \
+    zlib-dev \
+    jpeg-dev
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-RUN apk del .build-deps
-ENV DJANGO_SETTINGS_MODULE=devops0.settings
+
+
+FROM python:3.11-alpine
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+RUN apk add --no-cache \
+    libffi \
+    sqlite-libs \
+    jpeg
+COPY . /app
+RUN DJANGO_SECRET_KEY="dummy" \
+    HASHIDS_SALT="dummy" \
+    python manage.py collectstatic --noinput
 EXPOSE 8000
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "devops0.wsgi:application"]
+ENTRYPOINT ["scripts/entrypoint.sh"]
+CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "main.asgi:application"]
