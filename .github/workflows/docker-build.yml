@@ -2,7 +2,7 @@ name: Build and Push Alpine Docker Image
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 env:
