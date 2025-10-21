@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: alpine-example
+  IMAGE_NAME: devops0
   REGISTRY: docker.io
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}  
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
