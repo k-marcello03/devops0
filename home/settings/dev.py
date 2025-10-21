@@ -2,7 +2,7 @@
 
 from .base import *
 
-ALLOWED_HOSTS += ['192.168.0.60']
+ALLOWED_HOSTS += ['*']
 DEBUG = True
 
 WSGI_APPLICATION = 'home.wsgi.dev.application'
