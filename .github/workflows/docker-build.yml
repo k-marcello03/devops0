@@ -8,8 +8,9 @@ on:
 env:
   IMAGE_NAME: devops0
   REGISTRY: docker.io
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}  
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
+  DOCKER_USERNAME: kmarcello03
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
