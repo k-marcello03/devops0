@@ -11,13 +11,21 @@ RUN apk add --no-cache \
     python3-dev \
     libffi-dev \
     openssl-dev \
-    make
+    make \
+    nodejs \
+    npm
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY backend/ ./backend
+COPY frontend/ ./frontend
+
+WORKDIR /app/frontend
+RUN npm install && npm run build
+
+WORKDIR /app/backend
 
 EXPOSE 8000
 
