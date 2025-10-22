@@ -15,17 +15,21 @@ RUN apk add --no-cache \
     nodejs \
     npm
 
-COPY backend/requirements.txt .
+# requirements.txt a gyökérben van
+COPY requirements.txt .
+
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-COPY backend/ ./backend
-COPY frontend/ ./frontend
+# Az összes forrásfájl és mappa bemásolása a konténerbe
+COPY . .
 
-WORKDIR /app/frontend
+# A frontend buildelése - ha frontend fájlok is egy szinten vannak pl. package.json, src/
+WORKDIR /app
 RUN npm install && npm run build
 
-WORKDIR /app/backend
+# Vissza a backend root mappához
+WORKDIR /app
 
 EXPOSE 8000
 
