@@ -23,10 +23,6 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 WORKDIR /app
-RUN npm install
-RUN npm run build
-
-WORKDIR /app
 
 EXPOSE 8000
 
