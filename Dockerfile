@@ -21,5 +21,4 @@ COPY . .
 
 EXPOSE 8000
 
-# Django indítás
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "home.wsgi:application"]
