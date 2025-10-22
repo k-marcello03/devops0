@@ -36,4 +36,4 @@ WORKDIR /app
 EXPOSE 8000
 
 # Indítsd el a production szervert Gunicornnal, a megfelelő WSGI modult használva
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "home.wsgi.prod:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "home.wsgi:application"]
