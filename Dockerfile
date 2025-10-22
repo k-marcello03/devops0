@@ -3,6 +3,12 @@ FROM node:18-alpine as frontend-build
 
 WORKDIR /app
 
+RUN apk add --no-cache \
+    bash \
+    g++ \
+    make \
+    python3
+
 COPY package.json package-lock.json* ./
 RUN npm install
 
