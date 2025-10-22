@@ -1,5 +1,5 @@
 # Frontend build lépés Node.js Alpine alapú image-ben
-FROM node:18-alpine AS frontend-build
+FROM node:16-alpine as frontend-build
 
 WORKDIR /app
 
